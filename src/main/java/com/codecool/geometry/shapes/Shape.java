@@ -5,22 +5,28 @@ package com.codecool.geometry.shapes;
  * This is a abstract class representing geometrical shape.
  */
 public abstract class Shape {
-    /**
-     * Calculates shape's area.
-     *
-     * @return area of the shape
-     */
-    public abstract double calculateArea();
+
+    protected static String PERIMETER_FORMULA;
+    protected static String AREA_FORMULA;
+
+    protected double AREA;
+    protected double PERIMETER;
+
+    protected Shape() {
+        AREA = calculateArea();
+        PERIMETER = calculatePerimeter();
+    }
+
+    public abstract double calculateArea(); //Calculates shape's area.
+
+    public abstract double calculatePerimeter(); //Calculates shape's perimeter.
+
+    public String getAreaForShape() { return PERIMETER_FORMULA;}
+
+    public String getPerimeterForShape() {return AREA_FORMULA; }
 
     /**
-     * Calculates shape's perimeter.
      *
-     * @return perimeter of the shape
-     */
-    public abstract double calculatePerimeter();
-
-    /**
-     * Check if all args are greater than 0
      * Throws IllegalArgumentException if any of the parameters is 0 or less.
      *
      * @param args
