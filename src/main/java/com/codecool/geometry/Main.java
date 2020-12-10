@@ -26,17 +26,17 @@ public class Main {
         boolean isRunning = true;
         while (isRunning) {
             System.out.println(menu);
-            int menuItem = selectMenuItem(); //final line
-            executeSelection(menuItem); //final line
+//            int menuItem = selectMenuItem(); //final line
+//            executeSelection(menuItem); //final line
 
-//            collection.addShape(new Circle(2));
-//            collection.addShape(new Square(2));
-//            collection.addShape(new Rectangle(2, 3));
-//            collection.addShape(new Triangle(2, 3, 4));
-//            collection.addShape(new RegularPentagon(5));
+            collection.addShape(new Circle(2));
+            collection.addShape(new Square(2));
+            collection.addShape(new Rectangle(2, 3));
+            collection.addShape(new Triangle(2, 3, 4));
+            collection.addShape(new RegularPentagon(5));
            // System.out.println(collection);
 
-            executeSelection(2); //testline
+            executeSelection(4); //testline
             break;
 
         }
@@ -78,19 +78,20 @@ public class Main {
                 collection.addShape(createShape(selectedShape)); ;
                 break;
             case 2:
-                collection.getShapesTable();
-                collection.showTable();
+                collection.generateTable();
+                collection.showTable(collection.getShapesTable());
                 break;
             case 3:
-                // TODO Show shape with the largest perimeter
-                //By choosing the "Show shape with the largest perimeter"
-                // option displays the shape with
-                // largest perimeter in the collection
+                System.out.println("Shape with maximum perimeter");
+                Shape maxByPerimeter = collection.getLargestShapeByPerimeter();
+                String[][] displayLineP = collection.generateLine(maxByPerimeter);
+                collection.showTable(displayLineP);
                 break;
             case 4:
-                // TODO Show shape with the largest area
-                //By choosing the "Show shape with the largest area" option
-                // displays the shape with largest area in the collection
+                System.out.println("Shape with maximum perimeter");
+                Shape maxByArea = collection.getLargestShapeByArea();
+                String[][] displayLineA = collection.generateLine(maxByArea);
+                collection.showTable(displayLineA);
                 break;
             case 5:
                 // TODO Show formulas

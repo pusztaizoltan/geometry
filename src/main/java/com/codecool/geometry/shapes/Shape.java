@@ -26,9 +26,9 @@ public abstract class Shape {
 
     public Object[][] getParameters(){ return this.parameters;}
 
-    public String getAreaForShape() {return this.PERIMETER_FORMULA;}
+    public String getAreaForShape() {return this.AREA_FORMULA;}
 
-    public String getPerimeterForShape() {return this.AREA_FORMULA; }
+    public String getPerimeterForShape() {return this.PERIMETER_FORMULA; }
 
     /**
      *
