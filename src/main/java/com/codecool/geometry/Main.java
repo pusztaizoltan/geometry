@@ -26,18 +26,18 @@ public class Main {
         boolean isRunning = true;
         while (isRunning) {
             System.out.println(menu);
-//            int menuItem = selectMenuItem(); //final line
-//            executeSelection(menuItem); //final line
+            int menuItem = selectMenuItem(); //final line
+            executeSelection(menuItem); //final line
 
-            collection.addShape(new Circle(2));
-            collection.addShape(new Square(2));
-            collection.addShape(new Rectangle(2, 3));
-            collection.addShape(new Triangle(2, 3, 4));
-            collection.addShape(new RegularPentagon(5));
+//            collection.addShape(new Circle(2));
+//            collection.addShape(new Square(2));
+//            collection.addShape(new Rectangle(2, 3));
+//            collection.addShape(new Triangle(2, 3, 4));
+//            collection.addShape(new RegularPentagon(5));
            // System.out.println(collection);
 
-            executeSelection(4); //testline
-            break;
+            //executeSelection(5); //testline
+            //break;
 
         }
 
@@ -95,13 +95,8 @@ public class Main {
                 collection.showTable(displayLineA);
                 break;
             case 5:
-                // TODO Show formulas
-                //By choosing the "Show formulas" option
-                // the user can select from a list of existing shapes
-                // (like circle) and after that the stored formulas
-                // for that shape class (like Circle area formula: π×r×r,
-                // Circle perimeter formula: 2×π×r will be displayed.
-                break;
+                String shapeToShowFormula = selectShapeToAdd();
+                showFormula(shapeToShowFormula);
             case 0:
                 // TODO Exit
                 break;
@@ -171,7 +166,7 @@ public class Main {
                 throw new IllegalStateException("Unexpected value: " + shapeType);
         }
         return newShape;
-        // TODO Add new shape
+
     }
     public static double askShapeParameter(String parameterDescription){
         Scanner getParameter = new Scanner(System.in);
@@ -194,5 +189,36 @@ public class Main {
         double[] sides = new double[]{aaSide, bbSide, ccSide};
         Arrays.sort(sides);
         return sides[2] < sides[0] + sides[1];
+    }
+
+    public static void showFormula(String shapeType) {
+        switch (shapeType) {
+            case "circle":
+                System.out.println("PERIMETER: " + new Circle(1).getAreaForShape());
+                System.out.println("AREA: " + new Circle(1).getPerimeterForShape());
+                break;
+            case "rectangle":
+                System.out.println("PERIMETER: " + new Rectangle(1, 1).getAreaForShape());
+                System.out.println("AREA: " + new Rectangle(1, 1).getPerimeterForShape());
+                break;
+            case "triangle":
+                System.out.println("PERIMETER: " + new Triangle(1, 1, 1).getAreaForShape());
+                System.out.println("AREA: " + new Triangle(1, 1, 1).getPerimeterForShape());
+                break;
+            case "square":
+                System.out.println("PERIMETER: " + new Square(1).getAreaForShape());
+                System.out.println("AREA: " + new Square(1).getPerimeterForShape());
+                break;
+            case "equilateralTriangle":
+                System.out.println("PERIMETER: " + new EquilateralTriangle(1).getAreaForShape());
+                System.out.println("AREA: " + new EquilateralTriangle(1).getPerimeterForShape());
+                break;
+            case "regularPentagon":
+                System.out.println("PERIMETER: " + new RegularPentagon(1).getAreaForShape());
+                System.out.println("AREA: " + new RegularPentagon(1).getPerimeterForShape());
+                break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + shapeType);
+        }
     }
 }
