@@ -19,15 +19,25 @@ public class Main {
                                    "triangle", "square",
                                     "equilateralTriangle", "regularPentagon"};
 
+
+
     public static void main(String[] args) {
         collection = new ShapeCollection();
         boolean isRunning = true;
         while (isRunning) {
             System.out.println(menu);
-            int menuItem = selectMenuItem();
-            //System.out.println(menuItem);
-            executeSelection(menuItem);
+            int menuItem = selectMenuItem(); //final line
+            executeSelection(menuItem); //final line
 
+//            collection.addShape(new Circle(2));
+//            collection.addShape(new Square(2));
+//            collection.addShape(new Rectangle(2, 3));
+//            collection.addShape(new Triangle(2, 3, 4));
+//            collection.addShape(new RegularPentagon(5));
+           // System.out.println(collection);
+
+            executeSelection(2); //testline
+            break;
 
         }
     }
@@ -68,10 +78,8 @@ public class Main {
                 collection.addShape(createShape(selectedShape)); ;
                 break;
             case 2:
-                // TODO Show all shapes
-                //By choosing the "Show all shapes" option
-                // the table view provided by the shape collection
-                // is displayed to the user
+                collection.getShapesTable();
+                collection.showTable();
                 break;
             case 3:
                 // TODO Show shape with the largest perimeter
@@ -107,6 +115,7 @@ public class Main {
                                    "\n-AREA: " + newShape.calculateArea()+
                                    "\n-PERIMETER: " + newShape.calculatePerimeter() +
                                    "\n");
+                break;
             case "rectangle":
                 double aSide = askShapeParameter("add A side of the rectangle\n");
                 double bSide = askShapeParameter("add B side of the rectangle\n");
@@ -115,15 +124,22 @@ public class Main {
                                    "\n-AREA: " + newShape.calculateArea()+
                                    "\n-PERIMETER: " + newShape.calculatePerimeter() +
                                    "\n");
+                break;
             case "triangle":
                 double aaSide = askShapeParameter("add A side of the triangle\n");
                 double bbSide = askShapeParameter("add B side of the triangle\n");
-                double ccSide = askShapeParameter("add C side of the triangle\n");
+                double ccSide = 0;
+                do {
+                    System.out.println("Third side must be shorter than the sum of other two");
+                    ccSide = askShapeParameter("add C side of the triangle\n");
+                }
+                while(!testTriangleValidity(aaSide, bbSide, ccSide) || ccSide == 0);
                 newShape = new Triangle(aaSide, bbSide, ccSide);
                 System.out.println("\nNew triangle added" +
                                    "\n-AREA: " + newShape.calculateArea()+
                                    "\n-PERIMETER: " + newShape.calculatePerimeter() +
                                    "\n");
+                break;
             case "square":
                 double side = askShapeParameter("add side of the square\n");
                 newShape = new Square(side);
@@ -132,6 +148,7 @@ public class Main {
                                    "\n-AREA: " + newShape.calculateArea()+
                                    "\n-PERIMETER: " + newShape.calculatePerimeter() +
                                    "\n");
+                break;
             case "equilateralTriangle":
                 double sSide = askShapeParameter("add side of the equilateral triangle\n");
                 newShape = new EquilateralTriangle(sSide);
@@ -139,9 +156,10 @@ public class Main {
                                    "\n-AREA: " + newShape.calculateArea()+
                                    "\n-PERIMETER: " + newShape.calculatePerimeter() +
                                    "\n");
+                break;
             case "regularPentagon":
                 double pSide = askShapeParameter("add side of the regular pentagon\n");
-                newShape = new EquilateralTriangle(pSide);
+                newShape = new RegularPentagon(pSide);
                 System.out.println("\nNew pentagon added" +
                                    "\n-AREA: " + newShape.calculateArea()+
                                    "\n-PERIMETER: " + newShape.calculatePerimeter() +
@@ -166,7 +184,13 @@ public class Main {
                 System.out.println("invalid input format");
             }
         }
-        while (parameter == null);
+        while (parameter == null || parameter == 0);
         return parameter;
+    }
+
+    public static boolean testTriangleValidity(double aaSide, double bbSide, double ccSide){
+        double[] sides = new double[]{aaSide, bbSide, ccSide};
+        Arrays.sort(sides);
+        return sides[2] < sides[0] + sides[1];
     }
 }

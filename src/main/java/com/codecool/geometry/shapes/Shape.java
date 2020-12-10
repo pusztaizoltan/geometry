@@ -1,16 +1,18 @@
 package com.codecool.geometry.shapes;
 
+import static java.lang.Math.sqrt;
 
 /**
  * This is a abstract class representing geometrical shape.
  */
 public abstract class Shape {
 
-    protected static String PERIMETER_FORMULA;
-    protected static String AREA_FORMULA;
-
+    String PERIMETER_FORMULA;
+    String AREA_FORMULA;
+    Object[][] parameters;
     protected double AREA;
     protected double PERIMETER;
+
 
     protected Shape() {
         AREA = calculateArea();
@@ -21,9 +23,12 @@ public abstract class Shape {
 
     public abstract double calculatePerimeter(); //Calculates shape's perimeter.
 
-    public String getAreaForShape() { return PERIMETER_FORMULA;}
 
-    public String getPerimeterForShape() {return AREA_FORMULA; }
+    public Object[][] getParameters(){ return this.parameters;}
+
+    public String getAreaForShape() {return this.PERIMETER_FORMULA;}
+
+    public String getPerimeterForShape() {return this.AREA_FORMULA; }
 
     /**
      *
